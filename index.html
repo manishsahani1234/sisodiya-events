@@ -30,6 +30,18 @@
   --border:     #e0ddd8;
   --radius:     12px;
   --radius-sm:  8px;
+  --max-w:      1200px;
+  --gutter:     clamp(16px, 4vw, 48px);
+}
+
+/* Central content wrapper — 1200px desktop, fluid mobile */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
 }
 
 html { scroll-behavior: smooth; }
@@ -54,12 +66,18 @@ a  { text-decoration: none; color: inherit; }
   z-index: 200;
   background: var(--white);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(26,22,18,.06);
+  height: 64px;
+}
+
+.topnav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  height: 60px;
-  box-shadow: 0 2px 8px rgba(26,22,18,.06);
 }
 
 .topnav-logo {
@@ -123,7 +141,7 @@ a  { text-decoration: none; color: inherit; }
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 60px; left: 0; right: 0;
+  top: 64px; left: 0; right: 0;
   background: var(--white);
   border-bottom: 1px solid var(--border);
   z-index: 199;
@@ -219,8 +237,14 @@ a  { text-decoration: none; color: inherit; }
 ============================================================ */
 .sports-section {
   background: var(--white);
-  padding: 20px 16px;
+  padding: 20px 0;
   border-bottom: 1px solid var(--border);
+}
+
+.sports-section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
 .sports-section-title {
@@ -277,8 +301,14 @@ a  { text-decoration: none; color: inherit; }
   background: var(--ink);
   position: relative;
   overflow: hidden;
-  padding: 60px 24px 56px;
+  padding: 72px 0 64px;
   text-align: center;
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
 /* decorative rings */
@@ -400,8 +430,10 @@ a  { text-decoration: none; color: inherit; }
 /* ============================================================
    SECTION COMMON
 ============================================================ */
-.section { padding: 52px 24px; }
+.section { padding: 64px 0; }
 .section-alt { background: var(--white); }
+.section > .container, .section > * { }
+/* All sections use .container inside for 1200px centering */
 
 .section-eyebrow {
   display: inline-flex;
@@ -752,11 +784,16 @@ a  { text-decoration: none; color: inherit; }
 ============================================================ */
 .rating-strip {
   background: var(--gold);
-  padding: 18px 24px;
+  padding: 20px 0;
+}
+.rating-strip-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 32px;
   flex-wrap: wrap;
 }
 
@@ -782,7 +819,13 @@ a  { text-decoration: none; color: inherit; }
 footer {
   background: var(--ink);
   color: var(--cream);
-  padding: 28px 24px;
+  padding: 36px 0;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
 .footer-top {
@@ -857,21 +900,28 @@ footer {
    RESPONSIVE BREAKPOINTS
 ============================================================ */
 
-/* Tablet ≤ 900px */
-@media (max-width: 900px) {
+/* Tablet — below 1200px desktop: show hamburger, collapse nav */
+@media (max-width: 1199px) {
   .nav-links-desktop { display: none; }
   .topnav-phone      { display: none; }
   .hamburger         { display: flex; }
+}
 
+/* Tablet layout — 768px to 1199px */
+@media (max-width: 1199px) and (min-width: 769px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .testi-grid    { grid-template-columns: 1fr 1fr; }
   .process-grid  { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .contact-grid  { grid-template-columns: 1fr; }
+  .why-grid      { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Mobile ≤ 600px */
-@media (max-width: 600px) {
-  .topnav { padding: 0 16px; }
+/* Mobile — ≤ 768px */
+@media (max-width: 768px) {
+  .nav-links-desktop { display: none; }
+  .topnav-phone      { display: none; }
+  .hamburger         { display: flex; }
+
   .topnav-logo { font-size: 1.05rem; }
   .topnav-cta  { font-size: 0.72rem; padding: 7px 12px; }
 
@@ -881,40 +931,48 @@ footer {
   .vs-ticker-icon  { font-size: 20px; }
   .vs-ticker-name  { font-size: 9px; }
 
-  /* sports grid */
+  /* sports grid: 2 col on mobile */
   .sports-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .sports-card { padding: 14px 6px; border-radius: 10px; }
   .sports-card .icon  { font-size: 24px; }
   .sports-card .label { font-size: 12px; }
 
   /* hero */
-  .hero { padding: 44px 20px 40px; }
+  .hero { padding: 48px 0 40px; }
   .hero-stats { gap: 0; }
   .hero-stat  { padding: 0 16px; }
   .stat-num   { font-size: 1.5rem; }
 
   /* sections */
-  .section { padding: 40px 16px; }
+  .section { padding: 44px 0; }
 
   .services-grid { grid-template-columns: 1fr; gap: 10px; }
   .why-grid      { grid-template-columns: 1fr; }
   .testi-grid    { grid-template-columns: 1fr; }
   .process-grid  { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .contact-grid  { grid-template-columns: 1fr; }
 
   .form-row { grid-template-columns: 1fr; }
 
-  .rating-strip { gap: 12px; padding: 14px 16px; }
+  .rating-strip-inner { gap: 14px; }
   .rs-sep { display: none; }
 
-  .footer-top { flex-direction: column; gap: 16px; }
+  .footer-top    { flex-direction: column; gap: 16px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
 
-/* Small phones ≤ 380px */
-@media (max-width: 380px) {
-  .sports-card .icon  { font-size: 20px; }
+/* Small phones ≤ 480px */
+@media (max-width: 480px) {
+  .sports-card .icon  { font-size: 22px; }
   .sports-card .label { font-size: 11px; }
   .hero-stat { padding: 0 10px; }
+  .process-grid { grid-template-columns: 1fr; }
+}
+
+/* Very small phones ≤ 360px */
+@media (max-width: 360px) {
+  .sports-card .icon  { font-size: 18px; }
+  .sports-card .label { font-size: 10px; }
 }
 </style>
 </head>
