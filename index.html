@@ -41,7 +41,7 @@ html { scroll-behavior: smooth; }
 /* ── Page-level wrapper: centers everything, caps at 1200px ── */
 body {
   font-family: 'DM Sans', sans-serif;
-  background: #E8E4DF; /* outer gutter bg — slightly darker than cream */
+  background: transparent;
   color: var(--ink);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -55,10 +55,7 @@ a  { text-decoration: none; color: inherit; }
   width: 100%;
   max-width: var(--max-w);
   margin: 0 auto;
-  background: var(--cream);
-  /* Subtle shadow to show the 1200px boundary on large screens */
-  box-shadow: 0 0 0 1px rgba(0,0,0,.06), 0 8px 48px rgba(0,0,0,.12);
-  overflow: hidden; /* clip decorative overflow rings etc. */
+  overflow: hidden;
 }
 
 /* Inner padded container for content */
